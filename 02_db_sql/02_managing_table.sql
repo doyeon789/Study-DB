@@ -2,19 +2,57 @@
 PRAGMA table_info('examples');
 
 -- 1. Create a table
+CREATE TABLE examples(
+    ExamId INTEGER PRIMARY KEY AUTOINCREMENT,
+    LastName VARCHAR(50) NOT NULL,
+    Fistname VARCHAR(50) NOT NULL
+);
 
 -- 2. Modifying table fields
 -- 2.1 ADD COLUMN
+ALTER TABLE
+    examples
+ADD COLUMN
+    Country VARCHAR(100) NOT NULL DEFAULT 'default_value';
 
+
+ALTER TABLE
+    examples
+ADD COLUMN
+    Age INTEGER NOT NULL DEFAULT 0
+
+
+ALTER TABLE
+    examples
+ADD COLUMN
+    Address VARCHAR(150) NOT NULL DEFAULT 'default_value';
 -- sqlite는 단일 문을 사용하여 한번에 여러 열을 추가하는 것을 지원하지 않음
 
 -- 2.2 RENAME COLUMN
+ALTER TABLE
+    examples
+RENAME COLUMN
+    Address TO PostCode;
+
 
 -- 2.3 DROP COLUMN
+ALTER TABLE
+    examples
+DROP COLUMN
+    PostCode;
+
+
 
 -- 2.4 RENAME TO
+ALTER TABLE
+    examples
+RENAME TO
+    new_exampels;
+
+
 
 -- 3. Delete a table
+DROP TABLE new_exampels;
 
 
 -- sqlite는 컬럼 수정 불가
