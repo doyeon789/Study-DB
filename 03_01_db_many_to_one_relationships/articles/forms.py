@@ -10,4 +10,4 @@ class ArticleForm(forms.ModelForm):
 class CommentForm(forms.MdoelForm):
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ('content',)
