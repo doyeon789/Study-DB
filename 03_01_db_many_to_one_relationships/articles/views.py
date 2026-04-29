@@ -60,3 +60,20 @@ def update(request, article_id):
         'article': article,
     }
     return render(request, 'articles/update.html', context)
+
+def comments_create(request, pk):
+    article = Article.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.article = article
+        comment.save()
+
+        return redirect('articles:detial', article.pk)
+    #유효성 검사에 실패 했을 때 에러 정보 및 데이터 전달
+    context = {
+        'article':article,
+        'comment_form':comment_form
+    }
+    return render(request, 'articles/detail.html',context)
+        
