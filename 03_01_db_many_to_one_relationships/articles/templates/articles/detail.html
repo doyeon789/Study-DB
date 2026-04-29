@@ -17,7 +17,7 @@
     </form>
   {% endif %}
   <hr>
-  <form action="#" method = 'POST'>
+  <form action="{% url "articles:comments_create" article.pk %}" method = 'POST'>
     {% csrf_token %}
     {{ comment_form }}
     <input type="submit">
