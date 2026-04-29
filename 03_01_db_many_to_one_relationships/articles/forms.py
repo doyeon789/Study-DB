@@ -7,7 +7,7 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = '__all__'
 
-class CommentForm(forms.MdoelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content',)
