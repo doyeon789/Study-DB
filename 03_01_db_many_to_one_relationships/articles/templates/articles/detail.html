@@ -17,5 +17,10 @@
     </form>
   {% endif %}
   <hr>
+  <form action="#" method = 'POST'>
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit">
+  </form>
   <a href="{% url "articles:index" %}">메인 페이지로 돌아가기</a>
 {% endblock content %}
