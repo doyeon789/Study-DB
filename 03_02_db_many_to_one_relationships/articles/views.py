@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.views.decorators.http import require_http_methods
 
 from .forms import ArticleForm, CommentForm
 from .models import Article, Comment
@@ -14,6 +15,7 @@ def index(request):
 
 
 @login_required
+@require_http_methods(['GET','POST'])
 def create(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
@@ -52,6 +54,7 @@ def delete(request, article_id):
 
 
 @login_required
+@require_http_methods(['GET','POST'])
 def update(request, article_id):
     article = Article.objects.get(pk=article_id)
     if request.user == article.user:
