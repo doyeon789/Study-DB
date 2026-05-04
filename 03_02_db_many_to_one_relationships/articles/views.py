@@ -46,7 +46,8 @@ def detail(request, article_id):
 @login_required
 def delete(request, article_id):
     article = Article.objects.get(pk=article_id)
-    article.delete()
+    if request.user == article.user:
+        article.delete()
     return redirect('articles:index')
 
 
