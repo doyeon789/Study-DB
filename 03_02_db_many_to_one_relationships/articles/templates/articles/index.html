@@ -23,6 +23,7 @@
   
   {% for article in articles %}
     <div>
+      <div>작성자 : {{ article.user }}</div>
       <div>글 번호: {{ article.pk }}</div>
       <div>
         글 제목: <a href="{% url "articles:detail" article.pk %}">{{ article.title }}</a>
