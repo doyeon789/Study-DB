@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
-from django.views.decorators.http import require_http_methods, require_safe
+from django.views.decorators.http import require_http_methods, require_safe, require_POST
 
 from .forms import ArticleForm, CommentForm
 from .models import Article, Comment
@@ -48,6 +48,7 @@ def detail(request, article_id):
 
 
 @login_required
+@require_POST
 def delete(request, article_id):
     article = Article.objects.get(pk=article_id)
     if request.user == article.user:
@@ -77,6 +78,7 @@ def update(request, article_id):
 
 
 # 댓글 작성 view
+@require_POST
 def comments_create(request, article_id):
     # 1. 어떤 게시글에 작성되는 건지 게시글을 먼저 조회
     article = Article.objects.get(pk=article_id)
@@ -111,6 +113,7 @@ def comments_create(request, article_id):
 
 
 # 댓글 삭제 view
+@require_POST
 def comments_delete(request, article_id, comment_id):
     # 1. 몇번 댓글 지우는지 조회
     comment = Comment.objects.get(pk=comment_id)
