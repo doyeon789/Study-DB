@@ -4,6 +4,7 @@
   <h1>DETAIL</h1>
   <h2>{{ article.pk }} 번 글</h2>
   <hr>
+  <p>작성자 {{ article.user }}</p>
   <p>제목: {{ article.title }}</p>
   <p>내용: {{ article.content }}</p>
   <p>작성일: {{ article.created_at }}</p>
