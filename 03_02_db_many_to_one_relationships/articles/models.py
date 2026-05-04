@@ -28,6 +28,7 @@ class Comment(models.Model):
     # 외래 키 이름을 단수형으로 지은 이유는
     #   N에서 1을 참조하는 것을 명시하기 위함.
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
