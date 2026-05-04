@@ -111,7 +111,8 @@ def comments_delete(request, article_id, comment_id):
     comment = Comment.objects.get(pk=comment_id)
 
     # 2. 조회한 댓글 삭제
-    comment.delete()
+    if request.user == comment.user:
+        comment.delete()
 
     # 3. 삭제 후 게시글 상세 페이지로 redirect
     return redirect('articles:detail', article_id)
