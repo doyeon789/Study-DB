@@ -16,6 +16,7 @@ class Article(models.Model):
     # list()로 형변환 하거나 반복 시점에 실행됨. 이렇게 실제 데이터를 활용할때 평가를 진행.
     # "지금 당장 평가하지 않고, 정말 필요할 때 평가한다." ==> 성능과 유연성
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL,=)
     title = models.CharField(max_length=10)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

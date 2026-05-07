@@ -128,18 +128,20 @@ def comments_delete(request, article_id, comment_id):
     return redirect('articles:detail', article_id)
 
 
+# 좋아요
 def likes(request, article_id):
     # 1. 어떤 게시글에 좋아요를 누르는건지 조회
-    article = Article.objects.get(pk = article_id)
+    article = Article.objects.get(pk=article_id)
 
     # 2. 좋아요 기능 구현 (다대다 관계 추가/삭제)
-    # 2.1 게시글과 유저간 다대다 관계 여부에 따라 좋아요 추가/취소 결정
-    # 좋아요를 누르는 유저가 해당 게시글의 좋아요를 누른 유저 목록에 이미 포함이되어 있다면 ? => 좋아요 취소 (관계 삭제) 
+    # 2.1 게시글과 유저간 다대다 관계 여부에 따라 좋아요 추가/취소할지 결정
+    # 좋아요를 누르는 유저가 해당 게시글의 좋아요를 누른 유저 목록에 이미 포함이 되어있다면? ==> 좋아요 취소(관계 삭제)
     if request.user in article.like_users.all():
         article.like_users.remove(request.user)
         # request.user.like_articles.remove(article)
-    # 그런데 좋아요를 누르는 유저과 해당 게시글의 좋아요를 누른 유저 목록에 없다면? => 좋아요 등로 (관계 추가)
-    else : 
+    # 그런데 좋아요를 누르는 유저가 해당 게시글의 좋아요를 누른 유저 목록에 없다면? ==> 좋아요 등록(관계 추가)
+    else:
         article.like_users.add(request.user)
         # request.user.like_articles.remove(article)
-    return redirect('articles:indexs')
+    return redirect('articles:index')
+        
